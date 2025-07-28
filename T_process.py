@@ -52,17 +52,23 @@ def create_marts():
             'purchase_timestamp': df_stg['purchase_date'],
         }
     )
-    dim_product = pd.DataFrame(
-        data={
-            'product_id': df_stg['product_id'],
-            'product_description': df_stg['product_description']
-        }
+    dim_product = (
+        pd.DataFrame(
+            data={
+                'product_id': df_stg['product_id'],
+                'product_description': df_stg['product_description']
+            }
+        )
+        .drop_duplicates()
     )
-    dim_customer = pd.DataFrame(
-        data={
-            'customer_id': df_stg['customer_id'],
-            'customer_country': df_stg['customer_country'],
-        }
+    dim_customer = (
+        pd.DataFrame(
+            data={
+                'customer_id': df_stg['customer_id'],
+                'customer_country': df_stg['customer_country'],
+            }
+        )
+        .drop_duplicates()
     )
     dim_date = (
         pd.DataFrame(
