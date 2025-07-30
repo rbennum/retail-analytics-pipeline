@@ -83,8 +83,10 @@ def create_marts():
         .assign(
             year=lambda x: x['date_id'].dt.year,
             month=lambda x: x['date_id'].dt.month,
+            day=lambda x: x['date_id'].dt.day,
             day_of_week=lambda x: x['date_id'].dt.day_of_week,
-            is_weekend=lambda x: x['day_of_week'].isin([5, 6])
+            is_weekend=lambda x: x['day_of_week'].isin([5, 6]),
+            quarter=lambda x: x['date_id'].dt.quarter
         )
     )
     fct_sales.to_csv(FCT_SALES_FILE, index=False)
